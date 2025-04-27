@@ -1,7 +1,11 @@
+# utils.py
+
 import re
 import pandas as pd
 from config import TWINCAT_TYPE_MAPPING
-@staticmethod
+
+class Utils:
+    @staticmethod
     def format_modbus_address(address) -> str:
         """Formatea la dirección Modbus."""
         if pd.isna(address):
@@ -32,9 +36,9 @@ from config import TWINCAT_TYPE_MAPPING
     @staticmethod
     def generate_modbus_mapping(row) -> str:
         """Genera un mapeo Modbus para una fila dada."""
-        nombre_variable = ExcelProcessor.to_camel_case(row.get('Name/Description'))
+        nombre_variable = Utils.to_camel_case(row.get('Name/Description'))
         tipo_dato = row.get('Data Type', 'UNKNOWN')
-        direccion_modbus = ExcelProcessor.format_modbus_address(row.get('ADDRESS (DEC)'))
+        direccion_modbus = Utils.format_modbus_address(row.get('ADDRESS (DEC)'))
         informacion = row.get('Information', '')
 
         return (f"{nombre_variable:<30}: {tipo_dato:<10}; "
